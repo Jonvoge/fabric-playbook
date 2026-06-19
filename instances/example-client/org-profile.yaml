@@ -1,0 +1,16 @@
+# ORG PROFILE — example client instance.
+client: "Example Logistics A/S"
+archetype: A2                  # A1 | A2 | A3  (from the assessment)
+sovereignty: standard          # standard | regulated
+last_reviewed: "2026-06-19"
+
+domains:
+  commercial:  engineering-capable
+  finance:     self-service
+  operations:  self-service
+
+notes: >
+  Global logistics/distribution; Infor ION ERP (cloud move ~2-3 yrs, POC today).
+  On-prem SQL Server + SSAS cube + MDS, Power BI sprawl, weak governance. One daily CET
+  load underserves APAC/US. Version control / DevOps is a stated hard requirement.
+  Operational reliability ("driftsikkerhed") is a non-negotiable.

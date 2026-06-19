@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="150" viewBox="0 0 680 150" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Anatomy of a Fabric object name">
+  <text x="270" y="64" text-anchor="middle" dominant-baseline="central" font-size="20" fill="#5F5E5A" font-family="Consolas, monospace">-</text>
+  <text x="402" y="64" text-anchor="middle" dominant-baseline="central" font-size="20" fill="#5F5E5A" font-family="Consolas, monospace">-</text>
+
+  <g>
+    <rect x="200" y="42" width="62" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="231" y="64" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#04342C" font-family="Consolas, monospace">ws</text>
+  </g>
+  <g>
+    <rect x="280" y="42" width="104" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="332" y="64" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#04342C" font-family="Consolas, monospace">sales</text>
+  </g>
+  <g>
+    <rect x="420" y="42" width="80" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="460" y="64" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#04342C" font-family="Consolas, monospace">prod</text>
+  </g>
+
+  <line x1="231" y1="86" x2="231" y2="104" stroke="#73726c" stroke-width="0.5"/>
+  <line x1="332" y1="86" x2="332" y2="104" stroke="#73726c" stroke-width="0.5"/>
+  <line x1="460" y1="86" x2="460" y2="104" stroke="#73726c" stroke-width="0.5"/>
+
+  <text x="231" y="118" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5F5E5A">item type</text>
+  <text x="332" y="118" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5F5E5A">domain</text>
+  <text x="460" y="118" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5F5E5A">environment</text>
+</svg>

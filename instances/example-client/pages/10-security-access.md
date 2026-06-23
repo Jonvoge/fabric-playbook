@@ -1,12 +1,14 @@
 ---
 id: security-access
 topic: "Security, Access & Residency"
-owner: "Platform Owner"
+owner: "Platform Owner — Anders Holm (Head of IT)"
 scope: hybrid
 depends_on: [governance-classes]
 status: agreed
 constraints:
   - "Access MUST be granted via Entra security groups only (no per-user grants)"
+  - "EU customer PII and employee PII MUST carry GDPR sensitivity labels; RLS required on any model exposing this data to non-EU users"
+  - "Finance production workspaces MUST have a dedicated Auditor read-only Entra group with no edit permissions"
 ---
 
 # 10. Security, Access & Residency

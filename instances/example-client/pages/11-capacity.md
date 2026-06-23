@@ -1,17 +1,20 @@
 ---
 id: capacity
 topic: "Capacity, FinOps & Reliability"
-owner: "Platform Owner"
+owner: "Platform Owner — Anders Holm (Head of IT)"
 scope: hybrid
 depends_on: [operating-model, governance-classes]
 status: agreed
 constraints:
-  - "Business-critical workloads MUST have geo-redundancy and a tested DR runbook with defined RPO/RTO"
+  - "All capacities MUST be provisioned in North Europe"
+  - "Finance production capacity MUST be isolated (SOX audit boundary)"
+  - "Supply chain real-time capacity MUST be dedicated and geo-redundant (warehouse ops SLA)"
+  - "Fabric capacity MUST be live and stable before September 2026 P2 contract renewal"
 ---
 
 # 11. Capacity, FinOps & Reliability
 
-> `Owner Platform Owner` · `Status agreed` · `Depends on Operating Model, Governance Classes`
+> `Owner Anders Holm (Head of IT)` · `Status agreed` · `Depends on Operating Model, Governance Classes`
 
 **Purpose** — size capacity, attribute cost, and set the reliability/DR posture.
 

@@ -1,16 +1,74 @@
-# ORG PROFILE — example client instance.
+# ORG PROFILE — Example Logistics A/S
 client: "Example Logistics A/S"
 archetype: A2                  # A1 | A2 | A3  (from the assessment)
 sovereignty: standard          # standard | regulated
-last_reviewed: "2026-06-19"
+last_reviewed: "2026-06-23"
 
+# ── Org context ──────────────────────────────────────────────────────────────
+employees: 2400
+countries: [DK, SE, NO, DE, NL, PL, US, SG, AU]
+revenue_dkk_m: 3200
+industry: "Third-party logistics (3PL) — warehousing, freight, last-mile delivery"
+headquarters: "Copenhagen, Denmark"
+
+# ── Key stakeholders ─────────────────────────────────────────────────────────
+stakeholders:
+  exec_sponsor:    "Marianne Koch (CFO)"
+  platform_owner:  "Anders Holm (Head of IT)"
+  coe_lead:        "Sarah Lindberg (Head of Data & Analytics)"
+  lead_architect:  "Thomas Bak (Senior Data Engineer)"
+  domain_leads:
+    commercial:    "Katrine Møller"
+    supply_chain:  "Rasmus Dahl"
+    finance:       "Henrik Sørensen"
+    ops:           "Julie Winther"
+    hr:            "Mette Lund"
+
+# ── Domains ──────────────────────────────────────────────────────────────────
 domains:
-  commercial:  engineering-capable
-  finance:     self-service
-  operations:  self-service
+  commercial:    engineering-capable   # customer analytics + pricing; strong SQL, some Python
+  supply_chain:  engineering-capable   # warehouse ops + freight; IoT, GPS tracking — near A3
+  finance:       self-service          # controlling + group reporting; SOX-relevant
+  ops:           self-service          # SLA dashboards, operational KPIs
+  hr:            self-service          # headcount, retention (Workday source)
+
+# ── Legacy estate ─────────────────────────────────────────────────────────────
+legacy:
+  erp:        "Infor ION on-prem; cloud migration target 2027-Q4 (hard deadline)"
+  databases:
+    - "SQL Server 2019 — commercial DB (customer orders, pricing, contacts) — GDPR scope"
+    - "SQL Server 2019 — warehouse ops DB (WMS backend; near-real-time SLA)"
+    - "SQL Server 2019 — finance/controlling DB (SOX scope)"
+  olap:       "SSAS Tabular cube — commercial + finance (~180 measures; 14 subject areas)"
+  master_data: "MDS — customer master (5,200 customers) + product master (22,000 SKUs)"
+  crm:        "Salesforce Sales Cloud (REST API) — GDPR scope"
+  wms:        "Proprietary WMS — SQL Server backend; warehouse ops domain"
+  iot:        "GPS/IoT fleet tracking — Kafka stream, ~1,200 vehicles, ~40k events/hr"
+  hris:       "Workday (REST API) — HR source of truth; employee PII scope"
+  pbi_estate: "~340 published reports on shared Premium P2; ~65% ungoverned; 8 workspaces"
+  pbi_contract: "P2 shared capacity contract renewal September 2026"
+
+# ── Hard requirements (non-negotiable) ───────────────────────────────────────
+hard_requirements:
+  - "Version control + CI/CD on all Central and Governed workspaces (CTO mandate, day one)"
+  - "SOX compliance for Finance domain: change control, audit trail, no self-certification"
+  - "GDPR: EU customer and employee PII must remain in EU region (North Europe capacity)"
+  - "Supply chain operational reliability: warehouse ops cannot tolerate >2h unplanned downtime"
+  - "Infor ION ingestion must be source-swappable before 2027-Q4 cloud migration deadline"
+  - "P2 capacity replaced by Fabric capacity before September 2026 contract renewal"
+
+# ── Risk flags ────────────────────────────────────────────────────────────────
+risk_flags:
+  - "SOX (Finance): strict change control; plan for longer approval cycles in Finance domain"
+  - "IoT/real-time (Supply chain): Kafka stream is genuine real-time, not a nice-to-have"
+  - "GDPR: PII scope extends to commercial (customer orders + CRM) and HR (Workday)"
+  - "SSAS cube: 14 subject areas, ~180 measures; migration risk if rushed"
+  - "P2 renewal Sept 2026: hard cost deadline; Fabric capacity must be live and stable by Aug 2026"
+  - "Infor ION 2027-Q4: ingestion source-swap must be validated in wave 2, not wave 3"
 
 notes: >
-  Global logistics/distribution; Infor ION ERP (cloud move ~2-3 yrs, POC today).
-  On-prem SQL Server + SSAS cube + MDS, Power BI sprawl, weak governance. One daily CET
-  load underserves APAC/US. Version control / DevOps is a stated hard requirement.
-  Operational reliability ("driftsikkerhed") is a non-negotiable.
+  Global 3PL provider — warehousing, freight, last-mile. Primary complexity: real-time IoT
+  alongside traditional BI (SSAS → Direct Lake migration), SOX compliance constraints on Finance,
+  GDPR EU-PII across commercial and HR, and two hard external deadlines (P2 renewal Sept 2026,
+  Infor ION cloud move 2027-Q4). Supply chain domain is near-engineering-capable and will
+  graduate toward A3-style autonomous practices in wave 3.

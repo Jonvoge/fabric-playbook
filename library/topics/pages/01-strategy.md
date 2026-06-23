@@ -21,6 +21,18 @@ outcomes**, each with a metric and a target, because every arbitration later is 
 best serves these?" Then set the **platform ambition**: is Fabric the single platform, one of several, or
 a single workload? Without ratified outcomes, arbitration has no tiebreaker.
 
+A good outcome is **falsifiable**: "Reduce average reporting latency from T+1 to T+15 min for shared
+sources" is an outcome. "Improve data culture" is not. Outcomes cluster by archetype: A1 organisations
+tend toward consolidation and self-service enablement; A2 adds domain autonomy and legacy retirement; A3
+reaches for data-as-product metrics and AI workloads. Name 3–5 — more than that dilutes the signal and
+every decision arbitration becomes inconclusive.
+
+Platform ambition sets consolidation scope. "Fabric as the single platform" is the default for greenfield
+and A1/A2 orgs; "one of several" is the honest answer in enterprises where another cloud data warehouse
+is entrenched and a full migration is not funded. State it explicitly — downstream capacity, licensing,
+and migration decisions all depend on it. A platform-ambition decision that slips to wave 2 means wave 1
+trades off blindly.
+
 ## Decisions
 
 | Decision | Options | Choice | Why | Status |

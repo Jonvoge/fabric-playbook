@@ -1,0 +1,69 @@
+# ORG PROFILE — Struers A/S
+client: "Struers A/S"
+archetype: A2                  # A1 | A2 | A3  (from the assessment)
+sovereignty: standard          # standard | regulated — TBD: Roper Technologies (US-listed parent) may impose group-level compliance requirements
+last_reviewed: "2026-06-23"
+
+# ── Org context ──────────────────────────────────────────────────────────────
+employees: null                # TBD — ~400 knowledge workers in scope for the platform; thousands of production employees worldwide
+countries: null                # TBD — DK confirmed; APAC and US offices mentioned; exact footprint unknown
+revenue: null                  # TBD
+industry: "Precision scientific instruments — materialographic sample preparation equipment and consumables"
+headquarters: "Ballerup, Denmark"
+parent: "Roper Technologies (US-listed) — group compliance implications (SOX etc.) not yet clarified"
+
+# ── Key stakeholders ─────────────────────────────────────────────────────────
+stakeholders:
+  exec_sponsor:    "Bo Byrialsen (CIO) — major sign-offs only"
+  project_manager: "Christoffer Jensen — day-to-day project driver; platform strategy voice"
+  developers:
+    - "Zirun (developer; platform strategy voice)"
+    - "Ida (developer; platform strategy voice)"
+  domain_leads:
+    sales:         "TBD"
+    finance:       "TBD"
+    supply_chain:  "TBD"
+
+# ── Domains ──────────────────────────────────────────────────────────────────
+domains:
+  sales:           self-service          # CRM-dependent; strategic insights on sales/service; CRM data as enabler
+  finance:         self-service          # global processes, month-end close; SOX status TBD (Roper parent)
+  supply_chain:    self-service          # access control issues, shadow IT; maturity unknown — TBD
+  smart_lab:       engineering-capable   # IoT / real-time data; Smart Lab product line; likely engineering-capable — TBD
+  # Note: domain structure is inferred from workshop; confirm with client
+
+# ── Legacy estate ─────────────────────────────────────────────────────────────
+legacy:
+  erp:         "Infor ION — on-prem; cloud migration planned ~2–3 years (no exact date confirmed)"
+  sql_warehouse: "On-prem SQL Server data warehouse — primary analytical source; PBI semantic models sit on top"
+  master_data: "MDS (type TBD — Microsoft MDS assumed); mentioned as bottleneck"
+  crm:         "TBD — system not yet named; CRM data cited as Sales/service insights enabler"
+  iot:         "TBD — IoT/real-time need acknowledged (Smart Lab context) but NOT a wave 1 priority"
+  pbi_estate:  "TBD — Power BI semantic models on top of SQL warehouse; estate described as 'cowboy land' (ungoverned); report/workspace count unknown"
+
+# ── Hard requirements (non-negotiable) ───────────────────────────────────────
+hard_requirements:
+  - "Version control / DevOps — stated explicitly as a requirement in WS1 ('det er et krav')"
+  - "Operational stability — changes must not trigger cascading failures (DRIFTSSIKKERHED)"
+  - "Infor ION ingestion must be source-swappable before ERP cloud migration (~2–3 years)"
+
+# ── Risk flags ────────────────────────────────────────────────────────────────
+risk_flags:
+  - "SQL warehouse migration — complex business logic embedded in warehouse and semantic models ('deep in molecules'); must be inventoried before wave 2"
+  - "DRIFT vs. PROJECT tension — Zirun, Ida, and Christoffer are the core team; dedicated project capacity vs. BAU must be agreed"
+  - "ION ERP cloud migration horizon creates a hard source-swap deadline; no exact date yet — validate in WS2"
+  - "APAC/US time-zone gap — single CET batch causes poor service; incremental/near-real-time is a day-1 priority"
+  - "M&A complexity — data ingestion from acquired companies is a non-standard pattern; scope TBD"
+  - "Roper Technologies parent — US-listed; group-level compliance requirements (SOX, audit trail) not yet clarified — must be confirmed"
+  - "Shadow IT in Supply Chain — access control gaps; governance must address before domain enablement"
+
+notes: >
+  Struers is a global manufacturer of materialographic equipment (sample preparation for
+  materials testing). Owned by Roper Technologies (US). ~400 knowledge workers in scope;
+  global production footprint. Key contacts: CIO Bo Byrialsen (sign-off), PM Christoffer Jensen
+  (day-to-day), developers Zirun and Ida. Primary complexity: single CET batch causing
+  time-zone pain for APAC/US, an ungoverned PBI estate ('cowboy land') of semantic models
+  sitting on an on-prem SQL warehouse, ION ERP heading to cloud in ~2–3 years, and M&A
+  ingestion patterns. Version control is a stated requirement. IoT/Smart Lab is acknowledged
+  but NOT a wave 1 priority. CRM system, PBI estate size, Roper compliance requirements,
+  and exact country footprint are TBD.

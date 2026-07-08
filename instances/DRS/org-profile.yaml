@@ -1,0 +1,85 @@
+# ORG PROFILE — Dansk Retursystem
+client: "Dansk Retursystem (DRS)"
+archetype: A1                  # A1 base, with A2 practices on the Data Products side (see assessment.md)
+sovereignty: standard          # standard | regulated — GDPR applies (HR/salary/finance PII); no sector regulation
+last_reviewed: "2026-07-07"
+
+# ── Org context ──────────────────────────────────────────────────────────────
+industry: "Deposit-return system operator for beverage packaging (Denmark)"
+headquarters: "Denmark"
+# NOTE: employee count / revenue not confirmed from source material — fill with DRS.
+bi_team_size: 7                # small central BI/data team (from AD-group membership lists)
+
+# ── Key stakeholders / team ──────────────────────────────────────────────────
+# From AD-group membership in the wiki + playbook. Exact titles/roles to confirm with DRS.
+stakeholders:
+  bi_team: [Anne-Marie, Wim, Aske, Marianne, Britta, Maja, Peter]
+  service_account: "SVC_BI_Fabric"
+  consultants: "Jon Vöge + Anne (Inspari) — 2-week front-end assessment sprint"
+  # exec_sponsor:   TBC
+  # platform_owner: TBC
+
+# ── Domains ──────────────────────────────────────────────────────────────────
+# Two org domains, per DRS's own architecture (Data Platform vs Data Products).
+domains:
+  data_platform: engineering-capable   # central team: Integration + Data Modelling sub-domains
+  data_products: self-service          # business consumers + super-user build on certified models
+# Data Products sub-domains / business areas (workspaces):
+#   Operations:         Pantstation, Fabrik, Logistik, Bilanalyse (Tacho Online)
+#   Forretningssupport: Finans, Marketing
+#   Business Objects:   MasterData
+#   Cirkulær Økonomi:   Producenter og Importør
+
+# ── Estate / sources ──────────────────────────────────────────────────────────
+# 28-source inventory in the WIP playbook. Key sources:
+sources:
+  sql:        ["Navision (ERP → Business Central roadmap)", "Finans/Masterdata", "CS Data", "RI Data", "HRM Easy", "SPTID/Lessor (salary)", "Reporting Service Usage", "DataEdo"]
+  realtime:   ["Stargate/Transvision (offloaded prod DB; uptime/fault events)"]
+  api_rest:   ["Tacho Online (D4 / carpark)", "Fleetboard", "Struct", "Mercedes/Scania/Volvo bildata", "Integration Platform / Azure Services"]
+  dataverse:  ["Microsoft CRM (Dynamics)"]
+  files:      ["Excel / CSV via Azure Storage Account"]
+  future:     ["MES", "Business Central", "PIM", "Field Service", "new HR system", "new payroll system"]
+
+# ── Platform (as-is, back-end — NOT in scope this sprint) ────────────────────
+platform:
+  storage:     "Warehouse (T-SQL) + Lakehouse shortcuts; medallion raw → standardized → modelled → dm"
+  accelerator: "FETA — metadata-driven transformation codegen (dims/facts/bridges/roleplay)"
+  capacity:    "F64 PROD + F16 DEV/TEST (split to protect prod from dev/test bursting)"
+  monitoring:  "Fabric Capacity Metrics + FUAM"
+  cicd:        "Fabric Deployment Pipelines (DEV/TEST/PROD); some git (branches/PR)"
+  access:      "Entra/AD security groups; platform vs products developer/superuser split"
+
+# ── Sprint scope (front-end) ─────────────────────────────────────────────────
+sprint_focus:
+  - "07 gold → semantic model transition; where logic lives (silver/gold vs model vs DAX/query)"
+  - "07 fact consolidation (facts sharing dimensions); conformed dimensions"
+  - "08 import vs Direct Lake vs DirectQuery mix; parameter-driven connections"
+  - "08 Power BI app structure & navigation (co-owned with Anne)"
+  - "10 RLS/OLS for Finans + HR + Løn (Lessor / SP-tid)"
+  - "09 git, versioning & deployment of front-end / partial deliverables"
+  - "writeback (translytical / user data functions)"
+
+# ── Hard requirements ─────────────────────────────────────────────────────────
+hard_requirements:
+  - "Access granted via Entra security groups only (already their practice)"
+  - "DEV/TEST kept off PROD capacity (F16 vs F64) to avoid throttling prod"
+  - "GDPR: HR, salary (Løn/SP-tid) and finance PII protected — drives RLS/OLS scope"
+
+# ── Risk flags ────────────────────────────────────────────────────────────────
+risk_flags:
+  - "Semantic-model layer is undocumented/unstructured — the 'Arbejde med Jan' wiki page is empty"
+  - "Naming-convention source (Excel) is missing ('XYZ husk at lave dette') — grammar exists but not the authoritative reference"
+  - "Open question in playbook: should naming differ in PROD?"
+  - "RLS not yet defined despite HR/salary/finance PII in scope"
+  - "Front-end git/CI-CD path for partial deliverables not established (only back-end deployment pipelines)"
+  - "Small team (~7) — governance must stay low-friction or it won't survive"
+
+notes: >
+  DRS operates Denmark's deposit-return scheme. A prior Inspari Fabric Playbook established a solid,
+  well-documented back-end: medallion warehouse + lakehouse shortcuts, the FETA metadata-driven
+  transformation accelerator, F64/F16 capacity split, deployment pipelines, and Entra-group RBAC.
+  Operating model is central-platform (A1): one small central team builds; business domains consume
+  with light super-user self-service (A2 flavour on the Data Products side) — the wiki's "Data Mesh"
+  language is aspirational, not operational. This 2-week sprint is FRONT-END ONLY: making and
+  persisting decisions on the semantic layer, Power BI app/report structure, RLS/OLS, writeback, and
+  front-end git/CI-CD. Back-end decisions are already made and are not being re-litigated.

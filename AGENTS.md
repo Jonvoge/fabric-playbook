@@ -13,6 +13,9 @@ be re-expressed as JSON. Two roles, both binding.
    ratified — **ask the human; never guess a decision that was not made.**
 5. Prefer the structured tables (naming grammar, prefix table, source inventory, per-class items) over
    prose for deterministic facts.
+6. **Policy wins.** Where a process/delivery decision overlaps a governance/policy decision (see
+   `library/facilitation-kit.md` §6), the policy decision is upstream. If the two conflict, follow the
+   policy page and surface the contradiction.
 
 ## 2. Authoring agents (helping create/maintain the playbook)
 

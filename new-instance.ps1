@@ -64,25 +64,10 @@ notes: >
   known risk flags, and any constraints that override archetype defaults.
 "@ | Set-Content "$instanceRoot\org-profile.yaml" -Encoding UTF8
 
-# --- assessment.md -------------------------------------------------------------
-@"
-# Assessment — $ClientName
-
-| Dimension | Score (1–4) | Note |
-|---|---|---|
-| 1 Ownership ambition |  |  |
-| 2 Analytics maturity |  |  |
-| 3 Engineering capability |  |  |
-| 4 Existing estate |  |  |
-| 5 Scale & autonomy |  |  |
-| 6 Regulatory pressure |  |  |
-| 7 Sponsorship & funding |  |  |
-
-**Base archetype:** $Archetype
-**Sovereignty:** standard.
-**Per-domain maturity:** fill in.
-**Risk flags:** none identified yet.
-"@ | Set-Content "$instanceRoot\assessment.md" -Encoding UTF8
+# --- assessment.md (from library template) -------------------------------------
+$assessmentTemplate = Join-Path $root "library\templates\assessment.md"
+(Get-Content $assessmentTemplate -Raw) -replace '<Client Name>', $ClientName |
+    Set-Content "$instanceRoot\assessment.md" -Encoding UTF8
 
 # --- README.md (instance manifest) --------------------------------------------
 @"
@@ -121,7 +106,7 @@ Write-Host ""
 Write-Host "Instance created: $instanceRoot"
 Write-Host ""
 Write-Host "Next steps:"
-Write-Host "  1. Fill in org-profile.yaml (domains, notes)"
-Write-Host "  2. Complete assessment.md (score each dimension)"
-Write-Host "  3. Walk the decisions tables per workshop; change status to 'agreed'"
+Write-Host "  1. Run the assessment (library\assessment-kit.md) -> fill assessment.md + org-profile.yaml"
+Write-Host "  2. Run the waves per library\facilitation-kit.md (Wave 0 -> 4, gates in between)"
+Write-Host "  3. Per domain: copy library\templates\domain-onboarding.md and run the onboarding session"
 Write-Host "  4. Update README.md page status as topics are ratified"

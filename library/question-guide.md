@@ -117,7 +117,7 @@
 - **A3:** many data-product domains; formal per-domain ownership.
 
 **Q14. Who can create workspaces; what's allowed?** · *Capture:* [page 04](topics/pages/04-governance.md)
-*Why:* the rulebook (template comes later at Q19/Q31). *Options:* anyone · domain admins only · central only.
+*Why:* the rulebook (template comes later at Q19/Q37). *Options:* anyone · domain admins only · central only.
 - **A1:** central (or a small BI team) creates; tight control.
 - **A2:** domain admins create within a central standard.
 - **A3:** domains self-provision from templates/IaC within standards.
@@ -167,27 +167,67 @@
 - **A2:** standard assembled from the above, enforced via templates + policy.
 - **A3:** strict, comprehensive standard enforced by policy + IaC.
 
+### Workshop 2b-FE · Front-end standards — *BI lead, report/model authors, platform*
+
+> Deepens the serving side of Wave 2b: how semantic models are shaped, served, distributed as apps,
+> secured with RLS/OLS, version-controlled, and how users write back. Set the **standard** here; each
+> domain applies it in Wave 3. Run after the 2b core (naming resolved) so model/report naming inherits it.
+
+**Q22. How are semantic models shaped on top of gold?** · *Capture:* [page 07](topics/pages/07-transformation-modelling.md)
+*Why:* inconsistent grain, duplicated logic, and ad-hoc measures won't reconcile. *Options:* logic location · aggregation placement · fact grain · role-playing dims · measure standards.
+- **A1:** central models; logic in gold + thin model; base measures, light calculation groups.
+- **A2:** conformed core + domain composite models; pre-aggregate reused logic in gold; base measures + calculation groups + display folders.
+- **A3:** domain-owned models on a certified core; standardised measure layer; facts as products at a single grain.
+
+**Q23. What storage mode do we serve in, and how do models bind across environments?** · *Capture:* [page 08](topics/pages/08-semantic-serving.md)
+*Why:* import copies, surprise DirectQuery, and hard-coded connections all cost or break at promotion. *Options:* Direct Lake · import fallback · DirectQuery scope · DL fallback behaviour · connection parameterisation · model/report coupling.
+- **A1:** Direct Lake default; import for small/volatile; thin reports optional; parameterise connections.
+- **A2:** Direct Lake default; DirectQuery only for real-time edges; thin reports on shared certified models; parameter-driven binding across dev/test/prod.
+- **A3:** Direct Lake default; monitor DL fallback; thin reports on domain-owned certified models; parameterised, promotion-ready connections.
+
+**Q24. How do consumers reach content — apps and navigation?** · *Capture:* [page 08](topics/pages/08-semantic-serving.md)
+*Why:* workspace-shaped delivery confuses consumers; app sprawl is unmanageable. *Options:* app granularity · workspace→app mapping · navigation · content types · audiences · workspace layout.
+- **A1:** one or a few central apps; custom landing + navigation; audiences to segment.
+- **A2:** one app per business area/domain; one product workspace : one app; audiences where an app serves several groups.
+- **A3:** domain-owned apps; consumer-shaped navigation; foldered product workspaces (models / reports / support).
+
+**Q25. How do we design row- and object-level security?** · *Capture:* [page 10](topics/pages/10-security-access.md)
+*Why:* security duplicated per report leaks; undocumented mappings can't be audited. *Options:* RLS pattern · RLS scope · OLS · where security lives · group→role mapping · exemptions · testing.
+- **A1:** static roles → Entra groups; RLS on the certified model; documented mapping; "view as" testing.
+- **A2:** dynamic mapping table where scale needs, static where simple; OLS for salary/HR/PII; test matrix at promotion.
+- **A3:** dynamic, domain-owned RLS; OLS as standard for sensitive columns; documented mapping + exemptions; testing gate.
+
+**Q26. How do we version-control and promote front-end deliverables?** · *Capture:* [page 09](topics/pages/09-engineering-cicd.md)
+*Why:* PBIX can't be reviewed; whole-workspace deploys couple unrelated changes. *Options:* PBIP+TMDL · branching · partial-deliverable promotion · pipeline rules · report/model separation · self-service handling.
+- **A1:** PBIP + TMDL; simple/trunk branching; deployment pipelines; self-service builds kept in a sandbox.
+- **A2:** PBIP + TMDL; feature branch → PR → main; item-level selective deployment; separate models from thin reports.
+- **A3:** PBIP + TMDL, mandatory PR flow; item-level promotion with pipeline rebind rules; strict report/model separation.
+
+**Q27. Do users write data back, and how is it governed?** · *Capture:* [page 08](topics/pages/08-semantic-serving.md)
+*Why:* ungoverned writeback mutates source truth and can't be audited. *Options:* mechanism · use cases · landing · security · read-back.
+- **A1–A3:** native User Data Functions / translytical task flows; start from one concrete use case; land in a dedicated writeback schema; Entra-group gated + audit columns; define how written data re-appears in the model. *(Convergent — scope grows with maturity, not the pattern.)*
+
 ### Workshop 2c · People & ways of working — *CoE, enablement, change lead, domain leads*
 
-**Q22. What roles exist; who's responsible for what?** · *Capture:* [page 02](topics/pages/02-people-operating-model.md)
+**Q28. What roles exist; who's responsible for what?** · *Capture:* [page 02](topics/pages/02-people-operating-model.md)
 *Why:* authority was Q5; this is day-to-day execution. *Options:* a few core roles · detailed RACI.
 - **A1:** a few central roles (BI developer, admin, consumer); light RACI.
 - **A2:** five core roles (product owner, domain admin, platform engineer, steward, consumer); activity-level RACI.
 - **A3:** full taxonomy incl. per-domain product owners + platform/enablement teams; detailed RACI.
 
-**Q23. How do we train people, to what level per unit?** · *Capture:* [page 13](topics/pages/13-enablement-adoption.md)
+**Q29. How do we train people, to what level per unit?** · *Capture:* [page 13](topics/pages/13-enablement-adoption.md)
 *Why:* mixed levels are normal; approach central, intensity flexes. *Options:* central academy · vendor-led · community · blended.
 - **A1:** heavy central enablement — academy + lots of guided/low-code training (the dominant A1 investment).
 - **A2:** central academy + role-based paths; low-code units guided, engineering units advanced.
 - **A3:** lighter/advanced — communities, self-serve docs, standards adoption.
 
-**Q24. How do people get help; how do we build community?** · *Capture:* [page 13](topics/pages/13-enablement-adoption.md)
+**Q30. How do people get help; how do we build community?** · *Capture:* [page 13](topics/pages/13-enablement-adoption.md)
 *Why:* a single helpdesk doesn't scale. *Options:* helpdesk · champions · community of practice · tiered.
 - **A1:** central helpdesk + basic champions; central support heavy.
 - **A2:** tiered — central support + unit champions + community of practice + office hours.
 - **A3:** community of practice + domain champions + self-serve docs; thin central support.
 
-**Q25. How do we roll out and drive adoption?** · *Capture:* [page 13](topics/pages/13-enablement-adoption.md)
+**Q31. How do we roll out and drive adoption?** · *Capture:* [page 13](topics/pages/13-enablement-adoption.md)
 *Why:* big-bang fails in federated/mesh orgs. *Options:* big-bang · phased · pull-based via champions.
 - **A1:** phased, guided, comms + training heavy; central-driven push.
 - **A2:** phased + pull-based via champions; measure against Q1 outcomes.
@@ -204,15 +244,15 @@ Same nine questions per domain; answers are routed by whether the domain has **i
 **A1** most domains route self-service; in **A3** most route engineering-capable; **A2** is genuinely
 mixed. (In A1 there may be only one or two domains, so this wave is short.)
 
-- **Q26 Lakehouse layout** → domain lakehouse, bronze/silver/gold, reuse shared data via shortcuts.
-- **Q27 Tools (lakehouse vs warehouse)** → lakehouse-first; warehouse if the team is SQL-centric.
-- **Q28 Ingestion** → mirroring first; low-code Dataflows (self-service) / pipelines + notebooks (engineering).
-- **Q29 Models** → domain models on top of the certified core.
-- **Q30 CI/CD rigor** → full git flow (engineering) / pipelines only (self-service).
-- **Q31 Workspaces** → follow the central standard; create from the template.
-- **Q32 Curation** → domain curates + endorses its own products.
-- **Q33 Quality** → domain owns its rules + monitoring.
-- **Q34 Training & rollout** → guided (self-service) or advanced (engineering); rollout by readiness.
+- **Q32 Lakehouse layout** → domain lakehouse, bronze/silver/gold, reuse shared data via shortcuts.
+- **Q33 Tools (lakehouse vs warehouse)** → lakehouse-first; warehouse if the team is SQL-centric.
+- **Q34 Ingestion** → mirroring first; low-code Dataflows (self-service) / pipelines + notebooks (engineering).
+- **Q35 Models** → domain models on top of the certified core.
+- **Q36 CI/CD rigor** → full git flow (engineering) / pipelines only (self-service).
+- **Q37 Workspaces** → follow the central standard; create from the template.
+- **Q38 Curation** → domain curates + endorses its own products.
+- **Q39 Quality** → domain owns its rules + monitoring.
+- **Q40 Training & rollout** → guided (self-service) or advanced (engineering); rollout by readiness.
 
 ---
 
@@ -220,20 +260,20 @@ mixed. (In A1 there may be only one or two domains, so this wave is short.)
 
 ### Workshop 4a · Operations — *platform, ops, FinOps owner*
 
-**Q35. How do we watch usage, health, spend?** · *Capture:* [page 11](topics/pages/11-capacity.md)
+**Q41. How do we watch usage, health, spend?** · *Capture:* [page 11](topics/pages/11-capacity.md)
 *Why:* one place for capacity health + per-unit cost, tied to Q4. *Options:* built-in only · + hub · + third-party.
 - **A1:** built-in Capacity Metrics + a simple cost view; light FinOps.
 - **A2:** central metrics + monitoring hub + per-unit dashboards + monthly review.
 - **A3:** full FinOps — per-domain budgets, chargeback dashboards, alerts, optimisation.
 
-**Q36. What backup and recovery do we need?** · *Capture:* [page 11](topics/pages/11-capacity.md)
+**Q42. What backup and recovery do we need?** · *Capture:* [page 11](topics/pages/11-capacity.md)
 *Why:* most workloads fine on defaults; critical ones need more. *Options:* platform SLA · + backups · + geo-redundancy & runbook.
 - **A1:** platform SLA + redundancy for most; minimal DR.
 - **A2:** platform default; business-critical gets geo-redundancy + tested runbook.
 - **A3:** DR posture per criticality with tested runbooks broadly; higher baseline.
 - ⚑ *Regulated:* documented, tested DR with recovery targets regardless of base.
 
-**Q37. How do we keep things fast and efficient?** · *Capture:* [page 11](topics/pages/11-capacity.md)
+**Q43. How do we keep things fast and efficient?** · *Capture:* [page 11](topics/pages/11-capacity.md)
 *Why:* central guardrails, local tuning. *Options:* ad hoc · guardrails + tuning · central optimisation team.
 - **A1:** central guardrails + central tuning (central team optimises).
 - **A2:** central guardrails + units tune their own.
@@ -241,13 +281,13 @@ mixed. (In A1 there may be only one or two domains, so this wave is short.)
 
 ### Workshop 4b · Delivery lifecycle — *platform, CoE, delivery leads*
 
-**Q38. Standard path from idea to production; where is a workload's importance set?** · *Capture:* [page 09](topics/pages/09-engineering-cicd.md)
-*Why:* light gates keep quality; intake tags "standard" vs "business-critical", driving Q19 + Q36. *Options:* central gated · unit-autonomous + guardrails · hybrid stage-gate.
+**Q44. Standard path from idea to production; where is a workload's importance set?** · *Capture:* [page 09](topics/pages/09-engineering-cicd.md)
+*Why:* light gates keep quality; intake tags "standard" vs "business-critical", driving Q19 + Q42. *Options:* central gated · unit-autonomous + guardrails · hybrid stage-gate.
 - **A1:** light central gated process; central team delivers most; simple intake.
 - **A2:** light gated; intake tags importance + owner; rigor by unit skill.
 - **A3:** robust SDLC, domain-autonomous within global gates; intake + data contracts + product registration.
 
-**Q39. How do we move off and retire legacy?** *(only if legacy exists)* · *Capture:* [page 14](topics/pages/14-roadmap.md)
+**Q45. How do we move off and retire legacy?** *(only if legacy exists)* · *Capture:* [page 14](topics/pages/14-roadmap.md)
 *Why:* relevant only if the assessment found legacy to migrate. *Options:* lift-and-shift · re-platform · coexist-then-cutover · decommission-only.
 - **A1:** coexist-then-cutover, with a focus on migrating Power BI/legacy reporting content.
 - **A2:** per system — run parallel, validate, cut over, decommission; sequence by importance.
@@ -255,6 +295,6 @@ mixed. (In A1 there may be only one or two domains, so this wave is short.)
 
 ---
 
-*39 questions, three archetypes, one regulated overlay. Read your archetype's line, capture the choice
+*45 questions, three archetypes, one regulated overlay. Read your archetype's line, capture the choice
 + reason + owner in the named page. The questions and options never change — only which default line
 you read.*

@@ -51,6 +51,7 @@ AGENTS.md                 how agents consume & co-author
 archetypes.md             A1/A2/A3 + the regulated overlay
 library/
   templates/topic-page.md the clean skeleton — copy to start a new topic
+  templates/               reusable file templates (org-profile.yaml, assessment.md, domain-onboarding.md, instance-readme.md)
   topics/pages/           the ~15 topic templates (00–14)
   topics/diagrams/        reusable concept diagrams (SVG)
 instances/

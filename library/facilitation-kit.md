@@ -65,10 +65,10 @@ corresponding section of [question-guide.md](question-guide.md)** (Q-numbers bel
 |---|---|---|---|
 | **0 Strategy & rights** | S1 strategy/outcomes, Q1–Q4 (2.5h) · S2 decision rights & ownership, Q5–Q6 (2.5h) | 01, 02 (+ assessment confirmation) | **Exit gate: sponsorship.** Weak/uncommitted sponsor → stop and escalate; do not start Wave 1 |
 | **1 Foundations** | Gate session, Q7 (2h) · Bundle A platform-foundation, Q8–Q10 (half-day) · Bundle B security-foundation, Q11–Q12 (half-day) | 10 (residency) · 05 + 11-capacity rows · 10 + 04-tenant-settings rows | **Entry gate: residency/sovereignty.** Sets `sovereignty` + approved regions. If `regulated`, downstream defaults auto-tighten — don't re-argue them in the bundles |
-| **2 Shared standards** | W2a governance, Q13–Q16 (half-day) · W2b platform standards, Q17–Q21 (half-day) · W2c people, Q22–Q25 (half-day) | 2a: 03, 04 · 2b: 05-OneLake, 06, 07, 08, 09, **12 last** | naming (12/Q21) is *derived* from domains + capacity + environments — always resolve it last in the wave |
+| **2 Shared standards** | W2a governance, Q13–Q16 (half-day) · W2b platform standards, Q17–Q21 (half-day) · W2b-FE front-end standards, Q22–Q27 (half-day) · W2c people, Q28–Q31 (half-day) | 2a: 03, 04 · 2b: 05-OneLake, 06, 07, 08, 09, **12 last** · 2b-FE: 07, 08, 09, 10 | naming (12/Q21) is *derived* from domains + capacity + environments — always resolve it last in the wave; run 2b-FE after it |
 | | | 2c: 02-RACI rows, 13 | |
-| **3 Domain onboarding** | half-day **per domain**, Q26–Q34, repeatable | per-domain edge rows across 04–09, 13 — see [templates/domain-onboarding.md](templates/domain-onboarding.md) | domain's `domain_maturity` confirmed first |
-| **4 Operations & lifecycle** | W4a operations, Q35–Q37 (half-day) · W4b delivery lifecycle, Q38–Q39 (half-day) | 4a: 11 (FinOps, DR, performance) · 4b: 09 (intake goes live → `criticality` starts flowing), 14 | conditional: migration track (14/Q39) only if the assessment flagged legacy estate |
+| **3 Domain onboarding** | half-day **per domain**, Q32–Q40, repeatable | per-domain edge rows across 04–09, 13 — see [templates/domain-onboarding.md](templates/domain-onboarding.md) | domain's `domain_maturity` confirmed first |
+| **4 Operations & lifecycle** | W4a operations, Q41–Q43 (half-day) · W4b delivery lifecycle, Q44–Q45 (half-day) | 4a: 11 (FinOps, DR, performance) · 4b: 09 (intake goes live → `criticality` starts flowing), 14 | conditional: migration track (14/Q45) only if the assessment flagged legacy estate |
 | **Consolidate** | ~1 week | README manifest, publish | every row `agreed` or parked with owner + revisit date |
 
 ## 4. Exercise library

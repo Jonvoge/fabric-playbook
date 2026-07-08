@@ -45,24 +45,11 @@ if (Test-Path $libraryDiagrams) {
 
 $today = Get-Date -Format 'yyyy-MM-dd'
 
-# --- org-profile.yaml ----------------------------------------------------------
-@"
-# ORG PROFILE — $ClientName
-client: "$ClientName"
-archetype: $Archetype                  # A1 | A2 | A3  (from the assessment)
-sovereignty: standard          # standard | regulated
-last_reviewed: "$today"
-
-domains:
-  # one entry per domain; value: engineering-capable | self-service
-  # example:
-  #   commercial:  engineering-capable
-  #   finance:     self-service
-
-notes: >
-  Fill in client context: industry, key legacy systems, stated hard requirements,
-  known risk flags, and any constraints that override archetype defaults.
-"@ | Set-Content "$instanceRoot\org-profile.yaml" -Encoding UTF8
+# --- org-profile.yaml (from library template) ----------------------------------
+$orgProfileTemplate = Join-Path $root "library\templates\org-profile.yaml"
+((Get-Content $orgProfileTemplate -Raw) -replace '<Client Name>', $ClientName `
+    -replace '<ARCHETYPE>', $Archetype -replace '<DATE>', $today) |
+    Set-Content "$instanceRoot\org-profile.yaml" -Encoding UTF8
 
 # --- assessment.md (from library template) -------------------------------------
 $assessmentTemplate = Join-Path $root "library\templates\assessment.md"

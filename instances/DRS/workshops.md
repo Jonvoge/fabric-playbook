@@ -1,5 +1,13 @@
 # Workshop plan — DRS front-end sprint
 
+> **Outcomes captured (2026-07-08):** the WS1–WS4 room decisions are now folded into the topic pages as
+> `proposed` — see [pages/05](pages/05-architecture.md) (workspace/domain), [07](pages/07-transformation-modelling.md)
+> (modelling + docs), [08](pages/08-semantic-serving.md) (serving/refresh/endorsements + checklists),
+> [09](pages/09-engineering-cicd.md) (DEV/PROD + versioning — ⚠ constraint relaxed), [10](pages/10-security-access.md)
+> (access + RLS tiers), [12](pages/12-naming-standards.md) (`SM_[Topic]`). The recommended-starts below are
+> the pre-workshop script; where the room chose differently (e.g. Import over Direct Lake), the **pages are
+> authoritative**. Ratify `proposed → agreed` with the owner.
+
 > 2-week engagement (Jon Vöge + Anne, Inspari). **Front-end only.** Back-end (medallion, FETA,
 > capacity, back-end CI/CD, naming grammar) is decided and documented — not re-litigated here.
 > Each decision below maps to a row in the topic pages; ratify `proposed → agreed` as you go and keep
